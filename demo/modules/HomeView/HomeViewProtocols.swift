@@ -13,11 +13,14 @@ protocol HomeViewViewProtocol: class {
     // PRESENTER -> VIEW
     var presenter: HomeViewPresenterProtocol? { get set }
     func presenterPushData(receivedData: PostFeed)
+    func cargarActivity()
+    func detenerActivity()
 }
 
 protocol HomeViewWireFrameProtocol: class {
     // PRESENTER -> WIREFRAME
     static func createHomeViewModule() -> UIViewController
+    func presentDetailView(from view: UIViewController, withData: PostItem)
 }
 
 protocol HomeViewPresenterProtocol: class {
@@ -27,6 +30,7 @@ protocol HomeViewPresenterProtocol: class {
     var wireFrame: HomeViewWireFrameProtocol? { get set }
     
     func viewDidLoad()
+    func loadPageDetalle(with post:PostItem)
 }
 
 protocol HomeViewInteractorOutputProtocol: class {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HomeViewPresenter  {
     
@@ -18,15 +19,23 @@ class HomeViewPresenter  {
 }
 
 extension HomeViewPresenter: HomeViewPresenterProtocol {
+    
     func viewDidLoad() {
         //aqui le pido los datos al interactor
         interactor?.interactorGetData()
+        view?.cargarActivity()
+    }
+    
+    //paso para la pagina de detalle
+    func loadPageDetalle(with post: PostItem) {
+        self.wireFrame?.presentDetailView(from: self.view as! UIViewController, withData: post)
     }
 }
 
 extension HomeViewPresenter: HomeViewInteractorOutputProtocol {
     func interactorPushDataPresenter(with feed: PostFeed) {
         //recibi los datos filtrados y parseados del data manager
+        view?.detenerActivity()
         self.view?.presenterPushData(receivedData: feed)
     }
 }

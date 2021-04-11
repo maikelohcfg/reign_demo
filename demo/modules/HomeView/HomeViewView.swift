@@ -29,10 +29,20 @@ class HomeViewView: UIViewController {
 }
 
 extension HomeViewView: HomeViewViewProtocol {
+    
     // obtengo los datos y recargo la tabla
     func presenterPushData(receivedData: PostFeed) {
         self.feed = receivedData
         self.feedTable.reloadData()
+    }
+    
+    func cargarActivity() {
+        self.loadingIndicator.startAnimating()
+    }
+    
+    func detenerActivity() {
+        self.loadingIndicator.stopAnimating()
+        self.loadingIndicator.hidesWhenStopped = true
     }
 }
 
@@ -57,5 +67,8 @@ extension HomeViewView: UITableViewDataSource {
 }
 
 extension HomeViewView: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = self.feed.posts[indexPath.row]
+        self.presenter?.loadPageDetalle(with: post)
+    }
 }
