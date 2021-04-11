@@ -21,12 +21,12 @@ class HomeViewRemoteDataManager:HomeViewRemoteDataManagerInputProtocol {
                 switch response.result {
                     case .success:
                         guard let feeds = response.value else {return}
-                        self.remoteRequestHandler?.hackedNewCallbackFeedData(with: feeds)
-                        print("aki")
+                        self.remoteRequestHandler?.hackedNewCallbackFeedData(with:feeds)
                         break;
                 case .failure(_):
-                    print(response.error?.errorDescription)
                     print("error")
+                    print(response.error?.errorDescription as Any)
+                    break;
                 }
             }
     }

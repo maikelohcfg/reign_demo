@@ -12,6 +12,7 @@ import UIKit
 protocol HomeViewViewProtocol: class {
     // PRESENTER -> VIEW
     var presenter: HomeViewPresenterProtocol? { get set }
+    func presenterPushData(receivedData: PostFeed)
 }
 
 protocol HomeViewWireFrameProtocol: class {
@@ -30,6 +31,7 @@ protocol HomeViewPresenterProtocol: class {
 
 protocol HomeViewInteractorOutputProtocol: class {
 // INTERACTOR -> PRESENTER
+    func interactorPushDataPresenter(with feed: PostFeed)
 }
 
 protocol HomeViewInteractorInputProtocol: class {

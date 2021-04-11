@@ -21,7 +21,7 @@ struct Feed: Codable {
 struct Hit: Codable {
     var createdAt: String
     var title: String?
-    var url: JSONNull?
+    var url: String?
     var author: String
     var points: Int?
     var storyText, commentText: String?
@@ -55,14 +55,14 @@ struct Hit: Codable {
 struct HighlightResult: Codable {
     var author: Author
     var commentText, storyTitle, storyURL, title: Author?
-    var storyText: Author?
+    var url, storyText: Author?
 
     enum CodingKeys: String, CodingKey {
         case author
         case commentText = "comment_text"
         case storyTitle = "story_title"
         case storyURL = "story_url"
-        case title
+        case title, url
         case storyText = "story_text"
     }
 }
@@ -82,35 +82,4 @@ enum MatchLevel: String, Codable {
 
 enum Query: String, Codable {
     case mobile = "mobile"
-}
-
-// MARK: - Encode/decode helpers
-
-class JSONNull: Codable, Hashable {
-
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        
-    }
-
-    public var hashValue: Int {
-        return 0
-    }
-
-    public init() {}
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encodeNil()
-    }
 }

@@ -25,5 +25,8 @@ extension HomeViewPresenter: HomeViewPresenterProtocol {
 }
 
 extension HomeViewPresenter: HomeViewInteractorOutputProtocol {
-    // TODO: implement interactor output methods
+    func interactorPushDataPresenter(with feed: PostFeed) {
+        //recibi los datos filtrados y parseados del data manager
+        self.view?.presenterPushData(receivedData: feed)
+    }
 }

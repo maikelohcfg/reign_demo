@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftMoment
+import SwiftDate
 
 // MARK: - PostFeed
 struct PostFeed  {
@@ -20,7 +20,7 @@ struct PostFeed  {
 // MARK: - PostItem
 struct PostItem  {
     var title: String = ""
-    var createdAt: Moment = moment()
+    var createdAt: DateInRegion = DateInRegion()
     var author: String = ""
     var storyId: Int = 0
     var url: String = ""
