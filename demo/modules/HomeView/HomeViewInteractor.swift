@@ -10,21 +10,19 @@ import Foundation
 import SwiftDate
 
 class HomeViewInteractor: HomeViewInteractorInputProtocol {
-    
     weak var presenter: HomeViewInteractorOutputProtocol?
     var localDatamanager: HomeViewLocalDataManagerInputProtocol?
     var remoteDatamanager: HomeViewRemoteDataManagerInputProtocol?
+    var remoteFeed = PostFeed()
     
-    func interactorGetData() {
-        remoteDatamanager?.getHNFeedData()
+    func interactorGetData(with page: Int?) {
+        remoteDatamanager?.getHNFeedData(with: page)
     }
 }
 
 extension HomeViewInteractor: HomeViewRemoteDataManagerOutputProtocol {
     func hackedNewCallbackFeedData(with feed: Feed) {
-        //obtengo la data del data manager y se lo paso al presenter
-        var remoteFeed = PostFeed()
-//        remoteFeed.nbHits =
+        //obtengo la data del data manager y se lo paso 
         remoteFeed.page = feed.page
         remoteFeed.nbPages = feed.nbPages
         for item: Hit in feed.hits {

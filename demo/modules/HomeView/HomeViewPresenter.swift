@@ -19,11 +19,15 @@ class HomeViewPresenter  {
 }
 
 extension HomeViewPresenter: HomeViewPresenterProtocol {
-    
     func viewDidLoad() {
         //aqui le pido los datos al interactor
-        interactor?.interactorGetData()
+        interactor?.interactorGetData(with: nil)
         view?.cargarActivity()
+    }
+    
+    //para el paginado
+    func loadPageData(with page: Int) {
+        self.interactor?.interactorGetData(with: page)
     }
     
     //paso para la pagina de detalle

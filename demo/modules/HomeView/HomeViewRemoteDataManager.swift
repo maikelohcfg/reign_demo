@@ -13,9 +13,15 @@ class HomeViewRemoteDataManager:HomeViewRemoteDataManagerInputProtocol {
     
     var remoteRequestHandler: HomeViewRemoteDataManagerOutputProtocol?
     
-    func getHNFeedData() {
+    func getHNFeedData(with page: Int?) {
     
-        AF.request("https://hn.algolia.com/api/v1/search_by_date?query=mobile")
+        let parameters : [String: Any] = [
+            "query": "mobile",
+            "page" : page ?? 0
+        ]
+        
+//        AF.request("https://hn.algolia.com/api/v1/search_by_date?query=mobile")
+        AF.request("https://hn.algolia.com/api/v1/search_by_date", parameters: parameters)
             .validate(statusCode: 200..<299)
             .responseDecodable(of: Feed.self) { (response) in
                 switch response.result {

@@ -10,21 +10,52 @@ import Foundation
 import UIKit
 import SwiftDate
 
-class HomeViewView: UIViewController {
+class HomeViewView: UITableViewController {
 
     var presenter: HomeViewPresenterProtocol?
     var feed = PostFeed()
 
     //referencias a objetos de la vista
     @IBOutlet weak var feedTable: UITableView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loading: UIRefreshControl!
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
         self.navigationItem.title = "HN FEED"
         self.feedTable.rowHeight = UITableView.automaticDimension
         self.feedTable.estimatedRowHeight = 200
+    }
+    
+    @IBAction func pullAndRefresh(_ sender: UIRefreshControl) {
+        self.feed.page += 1
+        if( self.feed.page > self.feed.nbPages ){
+            self.loading.endRefreshing()
+            return
+        }
+        self.presenter?.loadPageData(with: self.feed.page)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.feed.nbHits
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "feedItem", for: indexPath) as! FeedItemTableViewCell
+        let post = self.feed.posts[indexPath.row]
+        var style = RelativeFormatter.defaultStyle()
+        style.flavours = [RelativeFormatter.Flavour.quantify]
+        
+        cell.nombreLabel.text = post.title
+        cell.fechaLabel.text  = post.createdAt.toRelative(since: nil, style: style, locale: Locales.spanish)
+        cell.authorLabel.text = post.author
+        return cell;
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = self.feed.posts[indexPath.row]
+        self.presenter?.loadPageDetalle(with: post)
     }
 }
 
@@ -37,38 +68,10 @@ extension HomeViewView: HomeViewViewProtocol {
     }
     
     func cargarActivity() {
-        self.loadingIndicator.startAnimating()
+        
     }
     
     func detenerActivity() {
-        self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.hidesWhenStopped = true
-    }
-}
-
-extension HomeViewView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.feed.nbHits
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "feedItem", for: indexPath) as! FeedItemTableViewCell
-        let post = self.feed.posts[indexPath.row]
-        var style = RelativeFormatter.defaultStyle()
-        style.flavours = [RelativeFormatter.Flavour.quantify]
-        
-        cell.nombreLabel.text = post.title
-        cell.fechaLabel.text  = post.createdAt.toRelative(since: nil, style: style, locale: Locales.spanish)
-        cell.authorLabel.text = post.author
-        return cell;
-    }
-    
-    
-}
-
-extension HomeViewView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = self.feed.posts[indexPath.row]
-        self.presenter?.loadPageDetalle(with: post)
+        self.loading.endRefreshing()
     }
 }

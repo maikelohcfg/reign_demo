@@ -31,6 +31,7 @@ protocol HomeViewPresenterProtocol: class {
     
     func viewDidLoad()
     func loadPageDetalle(with post:PostItem)
+    func loadPageData(with page: Int)
 }
 
 protocol HomeViewInteractorOutputProtocol: class {
@@ -45,7 +46,7 @@ protocol HomeViewInteractorInputProtocol: class {
     var remoteDatamanager: HomeViewRemoteDataManagerInputProtocol? { get set }
     
     // para obtener los datos desde los data manager desde el presenter
-    func interactorGetData()
+    func interactorGetData(with page: Int?)
 }
 
 protocol HomeViewDataManagerInputProtocol: class {
@@ -55,7 +56,7 @@ protocol HomeViewDataManagerInputProtocol: class {
 protocol HomeViewRemoteDataManagerInputProtocol: class {
     // INTERACTOR -> REMOTEDATAMANAGER
     var remoteRequestHandler: HomeViewRemoteDataManagerOutputProtocol? { get set }
-    func getHNFeedData()
+    func getHNFeedData(with page: Int?)
 }
 
 protocol HomeViewRemoteDataManagerOutputProtocol: class {
