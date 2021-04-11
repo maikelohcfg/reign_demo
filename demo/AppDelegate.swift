@@ -11,10 +11,20 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if #available(iOS 13, *) {
+            // se manejara todo por el scene que surgio con ios13
+        } else {
+            //inicializo modulo VIPPER HomeView para versiones inferiores a iOS 13
+            let homeView = HomeViewWireFrame.createHomeViewModule()
+            
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = homeView
+            window?.makeKeyAndVisible()
+        }
+        
         return true
     }
 
