@@ -65,7 +65,7 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
                 let localPosts = try CoreStoreDefaults.dataStack.fetchAll(
                     From<LocalPost>()
                     .where(\.$deleted == false)
-                    .orderBy(.ascending(\.$createdAt))
+                    .orderBy(.descending(\.$createdAt))
                 )
                 
                 for localPost: LocalPost in localPosts {
