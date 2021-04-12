@@ -10,6 +10,8 @@ import Foundation
 import SwiftDate
 
 class HomeViewInteractor: HomeViewInteractorInputProtocol {
+   
+    
     weak var presenter: HomeViewInteractorOutputProtocol?
     var localDatamanager: HomeViewLocalDataManagerInputProtocol?
     var remoteDatamanager: HomeViewRemoteDataManagerInputProtocol?
@@ -21,6 +23,10 @@ class HomeViewInteractor: HomeViewInteractorInputProtocol {
         } else {
             localDatamanager?.loadPosts(with: page)
         }
+    }
+    
+    func markPostAsDeleted(post: PostItem) {
+        self.localDatamanager?.markPostAsDeleted(post: post)
     }
 }
 
@@ -36,6 +42,11 @@ extension HomeViewInteractor: HomeViewRemoteDataManagerOutputProtocol {
             
             if(item.storyID == nil || item.storyURL == nil){
                 continue;
+            }
+            
+            let alreadyDeleted = self.localDatamanager?.postIsMarkedAsDeleteBefore(storyId: item.storyID!)
+            if(alreadyDeleted == true){
+                continue
             }
             var feedItem       = PostItem()
             feedItem.title     = item.storyTitle ?? item.title!

@@ -57,6 +57,18 @@ class HomeViewView: UITableViewController {
         let post = self.feed.posts[indexPath.row]
         self.presenter?.loadPageDetalle(with: post)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let post = feed.posts[indexPath.row]
+            self.presenter?.markPostAsDeleted(post: post)
+            feed.posts.remove(at: indexPath.row)
+            feed.nbHits -= 1
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
 }
 
 extension HomeViewView: HomeViewViewProtocol {

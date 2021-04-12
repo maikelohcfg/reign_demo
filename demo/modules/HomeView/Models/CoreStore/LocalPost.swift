@@ -35,7 +35,7 @@ enum V1 {
         var url: String = ""
         
         @Field.Stored("deleted")
-        var deleted : Bool = false
+        var deleted : Bool?
         
         
         

@@ -26,7 +26,7 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
                     Entity<LocalPost>("LocalPost")
                 ],
                 versionLock: [
-                    "LocalPost": [0xed31bd7501b366bc, 0xc62c5ff125c3337b, 0x44b84155f1b0d86f, 0x378f89d8ebb1903d]
+                    "LocalPost": [0x8760984b2f49c4c0, 0x8f2221539e237a60, 0xdf235422d3d8ff0, 0xadf8542e5f6cde5d]
                 ]
             ),
             migrationChain: ["V1"]
@@ -85,5 +85,32 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
             feed.nbPages = 0
             self.localRequestRemoteHandler?.localPostDataCallback(with: feed)
         }
+    }
+    
+    func markPostAsDeleted(post: PostItem) {
+        CoreStoreDefaults.dataStack.perform(
+            asynchronous: { (transaction) -> Void in
+                let localPost = try transaction.fetchOne(
+                    From<LocalPost>()
+                        .where(\.$storyId == post.storyId)
+                )
+                localPost?.deleted = true
+            },
+            completion: { _ in }
+        )
+    }
+    
+    //check if post is already delete and ignore
+    func postIsMarkedAsDeleteBefore(storyId: Int) -> Bool {
+        do {
+            let localPost = try CoreStoreDefaults.dataStack.fetchOne(
+                From<LocalPost>()
+                    .where(\.$storyId == storyId && \.$deleted == true)
+            )
+           return localPost != nil
+        } catch {
+            return false
+        }
+        
     }
 }
