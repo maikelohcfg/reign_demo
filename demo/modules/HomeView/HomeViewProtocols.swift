@@ -66,4 +66,15 @@ protocol HomeViewRemoteDataManagerOutputProtocol: class {
 
 protocol HomeViewLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
+    var localRequestRemoteHandler: HomeViewLocalDataManagerOutputProtocol? { get set }
+    func registerDataStack()
+    
+    // Se importan los post desde el remote data manager para el storage local teniendo en cuenta su ID para evitar duplicados
+    func importPostItem(withData: PostItem)
+    
+    func loadPosts( with page: Int?)
+}
+
+protocol HomeViewLocalDataManagerOutputProtocol: class {
+    func localPostDataCallback(with feed:PostFeed)
 }

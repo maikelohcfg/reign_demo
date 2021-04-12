@@ -15,8 +15,8 @@ class HomeViewWireFrame: HomeViewWireFrameProtocol {
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "navigation")
         if let view = navController.children.first as? HomeViewView {
             let presenter: HomeViewPresenterProtocol & HomeViewInteractorOutputProtocol = HomeViewPresenter()
-            let interactor: HomeViewInteractorInputProtocol & HomeViewRemoteDataManagerOutputProtocol = HomeViewInteractor()
-            let localDataManager: HomeViewLocalDataManagerInputProtocol = HomeViewLocalDataManager()
+            let interactor: HomeViewInteractorInputProtocol & HomeViewRemoteDataManagerOutputProtocol  & HomeViewLocalDataManagerOutputProtocol = HomeViewInteractor()
+            let localDataManager: HomeViewLocalDataManagerInputProtocol  = HomeViewLocalDataManager()
             let remoteDataManager: HomeViewRemoteDataManagerInputProtocol = HomeViewRemoteDataManager()
             let wireFrame: HomeViewWireFrameProtocol = HomeViewWireFrame()
             
@@ -26,6 +26,8 @@ class HomeViewWireFrame: HomeViewWireFrameProtocol {
             presenter.interactor = interactor
             interactor.presenter = presenter
             interactor.localDatamanager = localDataManager
+            localDataManager.registerDataStack()
+            localDataManager.localRequestRemoteHandler = interactor
             interactor.remoteDatamanager = remoteDataManager
             remoteDataManager.remoteRequestHandler = interactor 
             

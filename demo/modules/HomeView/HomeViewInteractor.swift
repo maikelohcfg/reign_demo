@@ -16,7 +16,13 @@ class HomeViewInteractor: HomeViewInteractorInputProtocol {
     var remoteFeed = PostFeed()
     
     func interactorGetData(with page: Int?) {
-        remoteDatamanager?.getHNFeedData(with: page)
+        
+        let isInternetAvailable = false
+        if(isInternetAvailable){
+            remoteDatamanager?.getHNFeedData(with: page)
+        } else {
+            localDatamanager?.loadPosts(with: page)
+        }
     }
 }
 
@@ -39,10 +45,18 @@ extension HomeViewInteractor: HomeViewRemoteDataManagerOutputProtocol {
             feedItem.author    = item.author
             feedItem.storyId   = item.storyID!
             feedItem.url       = item.storyURL!
+            
+            self.localDatamanager?.importPostItem(withData: feedItem)
             remoteFeed.posts.append(feedItem)
         }
         
         remoteFeed.nbHits = remoteFeed.posts.count
         self.presenter?.interactorPushDataPresenter(with: remoteFeed)
+    }
+}
+
+extension HomeViewInteractor:  HomeViewLocalDataManagerOutputProtocol {
+    func localPostDataCallback(with feed: PostFeed) {
+        self.presenter?.interactorPushDataPresenter(with: feed)
     }
 }

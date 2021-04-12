@@ -8,6 +8,7 @@ target 'demo' do
   # Pods for demo
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftDate', '~> 5.0'
+  pod 'CoreStore', '~> 8.0'
 
   target 'demoTests' do
     inherit! :search_paths

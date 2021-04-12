@@ -25,6 +25,7 @@
 		C42CD23E26229915005A6538 /* HomeViewRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CD23726229915005A6538 /* HomeViewRemoteDataManager.swift */; };
 		C42CD23F26229915005A6538 /* HomeViewWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CD23826229915005A6538 /* HomeViewWireFrame.swift */; };
 		C42CD24426229969005A6538 /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C42CD24326229969005A6538 /* HomeView.storyboard */; };
+		C4B9E58B26239E7B009FBCFE /* LocalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9E58A26239E7B009FBCFE /* LocalPost.swift */; };
 		C4EF3AF62622D9CE004A3AB1 /* FeedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EF3AF52622D9CE004A3AB1 /* FeedItemTableViewCell.swift */; };
 		C4EF3B092622F0A0004A3AB1 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EF3B022622F0A0004A3AB1 /* DetailPresenter.swift */; };
 		C4EF3B0A2622F0A0004A3AB1 /* DetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EF3B032622F0A0004A3AB1 /* DetailLocalDataManager.swift */; };
@@ -89,6 +90,7 @@
 		C42CD23826229915005A6538 /* HomeViewWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewWireFrame.swift; sourceTree = "<group>"; };
 		C42CD24326229969005A6538 /* HomeView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeView.storyboard; sourceTree = "<group>"; };
 		C472515B2622AF370070D468 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C4B9E58A26239E7B009FBCFE /* LocalPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPost.swift; sourceTree = "<group>"; };
 		C4EF3AF52622D9CE004A3AB1 /* FeedItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemTableViewCell.swift; sourceTree = "<group>"; };
 		C4EF3B022622F0A0004A3AB1 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		C4EF3B032622F0A0004A3AB1 /* DetailLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLocalDataManager.swift; sourceTree = "<group>"; };
@@ -235,6 +237,14 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
+		C4B9E58926239E32009FBCFE /* CoreStore */ = {
+			isa = PBXGroup;
+			children = (
+				C4B9E58A26239E7B009FBCFE /* LocalPost.swift */,
+			);
+			path = CoreStore;
+			sourceTree = "<group>";
+		};
 		C4EF3AF42622D9AE004A3AB1 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +271,7 @@
 		C4F2F2962622BD7A00FEA9D4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C4B9E58926239E32009FBCFE /* CoreStore */,
 				C4F2F2972622BD8F00FEA9D4 /* JsonModels.swift */,
 				C4F2F29F2622CAE900FEA9D4 /* ViewModels.swift */,
 			);
@@ -525,6 +536,7 @@
 				C42CD1FD262298D4005A6538 /* SceneDelegate.swift in Sources */,
 				C42CD23926229915005A6538 /* HomeViewPresenter.swift in Sources */,
 				C4EF3B0D2622F0A0004A3AB1 /* DetailView.swift in Sources */,
+				C4B9E58B26239E7B009FBCFE /* LocalPost.swift in Sources */,
 				C4EF3AF62622D9CE004A3AB1 /* FeedItemTableViewCell.swift in Sources */,
 				C42CD23F26229915005A6538 /* HomeViewWireFrame.swift in Sources */,
 			);

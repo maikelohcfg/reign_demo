@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.4.2)
+  - CoreStore (8.0.0)
   - SwiftDate (5.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - CoreStore (~> 8.0)
   - SwiftDate (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CoreStore
     - SwiftDate
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  CoreStore: a6909dae103a705db61346b05ec89187d9571f7d
   SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
 
-PODFILE CHECKSUM: c1af5116c9f5c567251caa337645ad1d1b6631f8
+PODFILE CHECKSUM: 0c691a7f045521b6ecffa2bab535bbacb7e699f1
 
 COCOAPODS: 1.10.1
