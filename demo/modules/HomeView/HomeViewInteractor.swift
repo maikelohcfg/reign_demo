@@ -16,9 +16,7 @@ class HomeViewInteractor: HomeViewInteractorInputProtocol {
     var remoteFeed = PostFeed()
     
     func interactorGetData(with page: Int?) {
-        
-        let isInternetAvailable = false
-        if(isInternetAvailable){
+        if(Reachability.isConnectedToNetwork()){
             remoteDatamanager?.getHNFeedData(with: page)
         } else {
             localDatamanager?.loadPosts(with: page)
