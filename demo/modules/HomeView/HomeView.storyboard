@@ -17,44 +17,43 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedItem" id="0i9-jI-qtA" customClass="FeedItemTableViewCell" customModule="demo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="74"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0i9-jI-qtA" id="nfw-OT-9qJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fecha" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsJ-6b-nrH">
-                                            <rect key="frame" x="342" y="15" width="42" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="63" y="39" width="35" height="20"/>
+                                            <fontDescription key="fontDescription" name="KohinoorTelugu-Medium" family="Kohinoor Telugu" pointSize="14"/>
                                             <color key="textColor" systemColor="systemGray2Color"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n59-mj-91T">
-                                            <rect key="frame" x="10" y="15" width="331" height="20.5"/>
+                                            <rect key="frame" x="10" y="38.5" width="43" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20.5" id="L3L-Bm-OT7"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="KohinoorTelugu-Medium" family="Kohinoor Telugu" pointSize="14"/>
+                                            <color key="textColor" systemColor="systemGray2Color"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titulo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtu-kw-NIh">
-                                            <rect key="frame" x="10" y="40.5" width="394" height="18.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <rect key="frame" x="10" y="10" width="394" height="18.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Xtu-kw-NIh" firstAttribute="leading" secondItem="nfw-OT-9qJ" secondAttribute="leading" constant="10" id="3us-sr-aQS"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="BsJ-6b-nrH" secondAttribute="trailing" constant="10" id="KvQ-aW-c1o"/>
-                                        <constraint firstItem="BsJ-6b-nrH" firstAttribute="leading" secondItem="n59-mj-91T" secondAttribute="trailing" constant="1" id="akV-hy-ruS"/>
-                                        <constraint firstAttribute="bottom" secondItem="Xtu-kw-NIh" secondAttribute="bottom" constant="15" id="bfi-01-bhe"/>
-                                        <constraint firstItem="Xtu-kw-NIh" firstAttribute="top" secondItem="n59-mj-91T" secondAttribute="bottom" constant="5" id="ful-mq-WNf"/>
-                                        <constraint firstItem="n59-mj-91T" firstAttribute="leading" secondItem="nfw-OT-9qJ" secondAttribute="leading" constant="10" id="lv1-mh-n0e"/>
-                                        <constraint firstItem="n59-mj-91T" firstAttribute="top" secondItem="nfw-OT-9qJ" secondAttribute="top" constant="15" id="qMe-TZ-zRG"/>
-                                        <constraint firstAttribute="trailing" secondItem="Xtu-kw-NIh" secondAttribute="trailing" constant="10" id="rBA-sE-tqG"/>
-                                        <constraint firstItem="BsJ-6b-nrH" firstAttribute="top" secondItem="n59-mj-91T" secondAttribute="top" id="uuG-Ka-Xgw"/>
+                                        <constraint firstAttribute="trailing" secondItem="Xtu-kw-NIh" secondAttribute="trailing" constant="10" id="Iju-La-WF7"/>
+                                        <constraint firstItem="Xtu-kw-NIh" firstAttribute="top" secondItem="nfw-OT-9qJ" secondAttribute="top" constant="10" id="KiD-ap-tgi"/>
+                                        <constraint firstItem="n59-mj-91T" firstAttribute="top" secondItem="Xtu-kw-NIh" secondAttribute="bottom" constant="10" id="S5g-hU-2kQ"/>
+                                        <constraint firstItem="n59-mj-91T" firstAttribute="leading" secondItem="nfw-OT-9qJ" secondAttribute="leading" constant="10" id="YlS-FQ-aSB"/>
+                                        <constraint firstItem="BsJ-6b-nrH" firstAttribute="leading" secondItem="n59-mj-91T" secondAttribute="trailing" constant="10" id="a9Y-GW-Hhf"/>
+                                        <constraint firstItem="Xtu-kw-NIh" firstAttribute="leading" secondItem="nfw-OT-9qJ" secondAttribute="leading" constant="10" id="n2E-ET-d4H"/>
+                                        <constraint firstAttribute="bottom" secondItem="n59-mj-91T" secondAttribute="bottom" constant="10" id="pFs-zf-g36"/>
+                                        <constraint firstAttribute="bottom" secondItem="BsJ-6b-nrH" secondAttribute="bottom" constant="10" id="vTy-Ao-MaK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
