@@ -14,11 +14,7 @@ typealias LocalPost = V1.LocalPost
 
 class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
 
-    var localRequestRemoteHandler: HomeViewLocalDataManagerOutputProtocol?
-    
-    func registerDataStack() {
-        //setup local core data
-    
+    static let stack: DataStack = {
         let stack = DataStack(
             CoreStoreSchema(
                 modelVersion: "V1",
@@ -31,22 +27,55 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
             ),
             migrationChain: ["V1"]
         )
-        let _ = stack.addStorage(
-            SQLiteStore(fileName: "demo_reign"),
-            completion: { (result) -> Void in
-                switch result {
-                case .success( _):
-                        print("added sqlite storage")
-                case .failure(let error):
-                    print("Error adding sqlite store with error: \(error)")
-                }
-            }
+        try! stack.addStorageAndWait(
+            SQLiteStore(
+                fileName: "demo_reign.sqlite",
+                localStorageOptions: .recreateStoreOnModelMismatch
+            )
         )
-        CoreStoreDefaults.dataStack = stack
+        
+        return stack
+    }()
+    
+    var localRequestRemoteHandler: HomeViewLocalDataManagerOutputProtocol?
+    
+    func registerDataStack() {
+        //setup local core data
+    
+//        self.stack = DataStack(
+//            CoreStoreSchema(
+//                modelVersion: "V1",
+//                entities: [
+//                    Entity<LocalPost>("LocalPost")
+//                ],
+//                versionLock: [
+//                    "LocalPost": [0x8760984b2f49c4c0, 0x8f2221539e237a60, 0xdf235422d3d8ff0, 0xadf8542e5f6cde5d]
+//                ]
+//            ),
+//            migrationChain: ["V1"]
+//        )
+//        let _ = self.stack!.addStorage(
+//            SQLiteStore(fileName: "demo_reign"),
+//            completion: { (result) -> Void in
+//                switch result {
+//                case .success( _):
+//                    print("added sqlite storage")
+//
+//                case .failure(let error):
+//                    print("Error adding sqlite store with error: \(error)")
+//                }
+//            }
+//        )
+//        CoreStoreDefaults.dataStack = self.stack!
+//        //deleted publisher setup
+//        self.deletedPublisher =  self.stack!.publishList(
+//            From<LocalPost>()
+//                .where(\.$deleted == true)
+//        )
     }
     
     func importPostItem(withData: PostItem) {
-        CoreStoreDefaults.dataStack.perform(
+        HomeViewLocalDataManager.stack.perform(
             asynchronous: { (transaction) -> Void in
                 try! transaction.importUniqueObject(
                     Into<LocalPost>(),
@@ -62,7 +91,7 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
         feed.posts = []
         DispatchQueue.main.async {
             do {
-                let localPosts = try CoreStoreDefaults.dataStack.fetchAll(
+                let localPosts = try HomeViewLocalDataManager.stack.fetchAll(
                     From<LocalPost>()
                     .where(\.$deleted == false)
                     .orderBy(.descending(\.$createdAt))
@@ -88,7 +117,7 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
     }
     
     func markPostAsDeleted(post: PostItem) {
-        CoreStoreDefaults.dataStack.perform(
+        HomeViewLocalDataManager.stack.perform(
             asynchronous: { (transaction) -> Void in
                 let localPost = try transaction.fetchOne(
                     From<LocalPost>()
@@ -98,14 +127,18 @@ class HomeViewLocalDataManager:HomeViewLocalDataManagerInputProtocol {
             },
             completion: { _ in }
         )
+        
     }
     
     //check if post is already delete and ignore
     func postIsMarkedAsDeleteBefore(storyId: Int) -> Bool {
         do {
-            let localPost = try CoreStoreDefaults.dataStack.fetchOne(
+            let localPost = try HomeViewLocalDataManager.stack.fetchOne(
                 From<LocalPost>()
                     .where(\.$storyId == storyId && \.$deleted == true)
+                    .tweak {
+                                $0.includesPendingChanges = true
+                            }
             )
            return localPost != nil
         } catch {
