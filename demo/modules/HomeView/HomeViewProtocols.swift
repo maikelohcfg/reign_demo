@@ -32,7 +32,7 @@ protocol HomeViewPresenterProtocol: class {
     func viewDidLoad()
     func loadPageDetalle(with post:PostItem)
     func loadPageData(with page: Int)
-    func markPostAsDeleted(post: PostItem)
+    func markPostAsDeleted(post: PostItem, index: Int)
 }
 
 protocol HomeViewInteractorOutputProtocol: class {
@@ -42,13 +42,15 @@ protocol HomeViewInteractorOutputProtocol: class {
 
 protocol HomeViewInteractorInputProtocol: class {
     // PRESENTER -> INTERACTOR
+    var remoteFeed : PostFeed { get set}
+    
     var presenter: HomeViewInteractorOutputProtocol? { get set }
     var localDatamanager: HomeViewLocalDataManagerInputProtocol? { get set }
     var remoteDatamanager: HomeViewRemoteDataManagerInputProtocol? { get set }
     
     // para obtener los datos desde los data manager desde el presenter
     func interactorGetData(with page: Int?)
-    func markPostAsDeleted(post: PostItem)
+    func markPostAsDeleted(post: PostItem, index: Int)
 }
 
 protocol HomeViewDataManagerInputProtocol: class {

@@ -35,8 +35,8 @@ extension HomeViewPresenter: HomeViewPresenterProtocol {
         self.wireFrame?.presentDetailView(from: self.view as! UIViewController, withData: post)
     }
     //para marcar como elimino un post
-    func markPostAsDeleted(post: PostItem) {
-        self.interactor?.markPostAsDeleted(post: post)
+    func markPostAsDeleted(post: PostItem, index: Int) {
+        self.interactor?.markPostAsDeleted(post: post, index: index)
     }
 }
 

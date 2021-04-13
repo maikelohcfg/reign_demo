@@ -25,7 +25,8 @@ class HomeViewInteractor: HomeViewInteractorInputProtocol {
         }
     }
     
-    func markPostAsDeleted(post: PostItem) {
+    func markPostAsDeleted(post: PostItem, index: Int) {
+        self.remoteFeed.posts.remove(at: index)
         self.localDatamanager?.markPostAsDeleted(post: post)
     }
 }

@@ -60,11 +60,12 @@ class HomeViewView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let post = feed.posts[indexPath.row]
-            self.presenter?.markPostAsDeleted(post: post)
-            feed.posts.remove(at: indexPath.row)
+            let post = feed.posts.remove(at: indexPath.row)
+            self.presenter?.markPostAsDeleted(post: post, index: indexPath.row)
             feed.nbHits -= 1
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            print("deleted row")
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }

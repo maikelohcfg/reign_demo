@@ -34,8 +34,8 @@ enum V1 {
         @Field.Stored("url")
         var url: String = ""
         
-        @Field.Stored("deleted")
-        var deleted : Bool?
+        @Field.Stored("markedDeleted")
+        var markedDeleted : Bool = false
         
         
         
@@ -49,6 +49,10 @@ enum V1 {
         
         func update(from source: PostItem, in transaction: BaseDataTransaction) throws {
             
+        }
+        
+        static func shouldUpdate(from source: PostItem, in transaction: BaseDataTransaction) -> Bool {
+            return false
         }
         
         
