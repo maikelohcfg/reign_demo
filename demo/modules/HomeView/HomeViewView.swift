@@ -48,7 +48,7 @@ class HomeViewView: UITableViewController {
         style.flavours = [RelativeFormatter.Flavour.quantify]
         
         cell.nombreLabel.text = post.title
-        cell.fechaLabel.text  = post.createdAt.toRelative(since: nil, style: style, locale: Locales.spanish)
+        cell.fechaLabel.text  = post.createdAt.isYesterday ? "Ayer" : post.createdAt.toRelative(since: nil, style: style, locale: Locales.spanish)
         cell.authorLabel.text = post.author
         return cell;
     }
